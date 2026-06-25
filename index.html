@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+
+  <!-- React via CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function App() {
+  const [data, setData] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("https://TUO-URL.up.railway.app/api/excel")
+      .then(res => res.json())
+      .then(data => setData(data));
+  }, []);
+
+  return (
+    <div>
+      <h1>Dati Excel</h1>
+
+      <table border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Anno</th>
+            <th>Valore</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((row, i) => (
+            <tr key={i}>
+              <td>{row.ID}</td>
+              <td>{row.Nome}</td>
+              <td>{row.Anno}</td>
+              <td>{row.Valore}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+</script>
+
+</body>
+</html>
