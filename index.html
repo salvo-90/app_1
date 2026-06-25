@@ -20,7 +20,7 @@ function App() {
   const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("https://TUO-URL.up.railway.app/api/excel")
+    fetch("https://app1-production-0fbb.up.railway.app/api/excel")
       .then(res => res.json())
       .then(data => setData(data));
   }, []);
