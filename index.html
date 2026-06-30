@@ -18,12 +18,34 @@
 
 function App() {
   const [data, setData] = React.useState([]);
+  const [anno,setAnno] = React.useState("");
+  
+<select
+  value={anno}
+  onChange={(e)=>setAnno(e.target.value)}
+>
+  <option value="">Tutti</option>
+  <option value="2023">2023</option>
+  <option value="2024">2024</option>
+  <option value="2025">2025</option>
+</select>
 
-  React.useEffect(() => {
-    fetch("https://app1-production-0fbb.up.railway.app/api/excel")
-      .then(res => res.json())
-      .then(data => setData(data));
-  }, []);
+  
+React.useEffect(() => {
+
+  let url =
+    "https://app1-production-0fbb.up.railway.app/api/excel";
+
+  if(anno){
+    url += `?anno=${anno}`;
+  }
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => setData(data));
+
+}, [anno]);
+
 
   return (
     <div>
