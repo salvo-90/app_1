@@ -20,16 +20,6 @@ function App() {
   const [data, setData] = React.useState([]);
   const [anno,setAnno] = React.useState("");
   
-<select
-  value={anno}
-  onChange={(e)=>setAnno(e.target.value)}
->
-  <option value="">Tutti</option>
-  <option value="2023">2023</option>
-  <option value="2024">2024</option>
-  <option value="2025">2025</option>
-</select>
-
   
 React.useEffect(() => {
 
@@ -49,6 +39,15 @@ React.useEffect(() => {
 
   return (
     <div>
+      <select
+  value={anno}
+  onChange={(e)=>setAnno(e.target.value)}
+>
+  <option value="">Tutti</option>
+  <option value="2023">2023</option>
+  <option value="2024">2024</option>
+  <option value="2025">2025</option>
+</select>
       <h1>Dati Excel</h1>
 
       <table border="1">
