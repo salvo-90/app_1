@@ -27,16 +27,25 @@ React.useEffect(() => {
   let url =
     "https://app1-production-0fbb.up.railway.app/api/excel";
 
-  if(anno){
-    url += `?anno=${anno}`;
+  const params = [];
+
+  if (anno) {
+    params.push(`anno=${anno}`);
+  }
+
+  if (nome) {
+    params.push(`nome=${encodeURIComponent(nome)}`);
+  }
+
+  if (params.length > 0) {
+    url += "?" + params.join("&");
   }
 
   fetch(url)
     .then(res => res.json())
     .then(data => setData(data));
 
-}, [anno]);
-
+}, [anno, nome]);
 
   return (
     <div>
@@ -49,6 +58,16 @@ React.useEffect(() => {
   <option value="2024">2024</option>
   <option value="2025">2025</option>
 </select>
+      
+&nbsp;&nbsp;
+
+<input
+  type="text"
+  placeholder="Cerca Cliente..."
+  value={nome}
+  onChange={(e) => setNome(e.target.value)}
+/>
+
       <h1>Dati Excel</h1>
 
       <table border="1">
