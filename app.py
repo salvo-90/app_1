@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, jsonify
+from flask import Flask, send_from_directory, jsonify, request
 import pandas as pd
 
 app = Flask(__name__)
@@ -7,13 +7,16 @@ app = Flask(__name__)
 def home():
     return send_from_directory(".", "index.html")
 
-@app.get("/api/excel")
-def get_excel(anno: int = None):
+
+@app.route("/api/excel")
+def get_excel():
+
+    anno = request.args.get("anno")
 
     df = pd.read_excel("dati.xlsx")
 
     if anno:
-        df = df[df["Anno"] == anno]
+        df = df[df["Anno"] == int(anno)]
 
     return df.to_dict(orient="records")
 
