@@ -7,10 +7,15 @@ app = Flask(__name__)
 def home():
     return send_from_directory(".", "index.html")
 
-@app.route("/api/excel")
-def excel():
+@app.get("/api/excel")
+def get_excel(anno: int = None):
+
     df = pd.read_excel("dati.xlsx")
-    return jsonify(df.to_dict(orient="records"))
+
+    if anno:
+        df = df[df["Anno"] == anno]
+
+    return df.to_dict(orient="records")
 
 if __name__ == "__main__":
     app.run()
